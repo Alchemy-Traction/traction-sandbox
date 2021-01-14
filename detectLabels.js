@@ -25,7 +25,7 @@ handleURL(ourImage, (err, data) => {
     MaxLabels: 20,
     MinConfidence: 70 
   },
-  (err, data) => {
-    console.log(data);
+  (err, labels) => {
+    console.log(labels);
   }); 
 });
