@@ -1,5 +1,9 @@
 # traction-sandbox
-Repo dedicated to exploring capabilities of chosen technologies
 
+##TWILO INCOMING-SMS 
+- run localhost in terminal 'npm run start:watch'
+- run ngrock in terminal 'npx ngrok http {PORT}
+- ensure webhook reflects Forwarding url in Twilo messaging url
 
-Adding line to README
+** NEXT STEPS:
+    - munge values from res.body
