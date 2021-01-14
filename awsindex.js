@@ -15,10 +15,10 @@ AWS.config.update({
 //DETECT LABELS
 rekognition.detectLabels({
   Image: {
-    Bytes: fs.readFileSync('./data/dapper_pug.jpg') //enjoy changing the picture in /data
+    Bytes: fs.readFileSync('./data/running-champ.jpeg') //enjoy changing the picture in /data
   },
   MaxLabels: 10,
-  MinConfidence: 80 
+  MinConfidence: 70 
 },
 (err, data) => {
   console.log(data);
