@@ -1,4 +1,3 @@
-require('dotenv').config();
 const AWS = require('aws-sdk');
 const handleURL = require('./handleURL');
 
@@ -9,23 +8,24 @@ AWS.config.update({
   region: process.env.AWS_REGION
 });
 
-const ourImage = 'https://p1.pxfuel.com/preview/43/831/824/frogs-curious-funny-figures.jpg';
+const rekognition = new AWS.Rekognition(); 
 
-handleURL(ourImage, (err, data) => {
-  if(err) {
-    throw new Error(err);
-  }
-
-  const rekognition = new AWS.Rekognition();
-
-  rekognition.detectLabels({
-    Image: {
-      Bytes: data
+const detectLabels = async(url) => {
+  const image = await handleURL(url);
+  return new Promise((resolve, reject) => {
+    rekognition.detectLabels({
+      Image: {
+        Bytes: image
+      },
+      MaxLabels: 20,
+      MinConfidence: 70 
     },
-    MaxLabels: 20,
-    MinConfidence: 70 
-  },
-  (err, data) => {
-    console.log(data);
-  }); 
-});
+    (err, labels) => {
+      if(err) reject(err);
+      else resolve(labels);
+    }); 
+  });
+
+};
+
+module.exports = detectLabels;
